@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4961901881654805391}
   - component: {fileID: 6171743146025237343}
   - component: {fileID: 147404005002786844}
+  - component: {fileID: 3526141148502718012}
   m_Layer: 0
   m_Name: StickerPrefab
   m_TagString: StickerPrefab
@@ -75,3 +76,16 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!65 &3526141148502718012
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8196514816173902617}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10, y: 10, z: 0.01}
+  m_Center: {x: 0, y: 0, z: 0}
