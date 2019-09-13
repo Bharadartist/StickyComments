@@ -1,9 +1,10 @@
-Image reco - Done
-Point tap to create prefab - Done
-Stabilize content
-Canvas as prefab
-Assign text at runtime
-Input from input field to text
-Store text transforms
-Load text transforms
-
+Image Reco
+Canvas
+Photoshop UI
+Sticker UI
+-Buttons
+-Options
+Instantiate Script
+Touch Functions
+Stickers, flip, Rotate, Capture
+Name
