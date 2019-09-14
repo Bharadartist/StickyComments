@@ -7,7 +7,7 @@ public class SceneManager : MonoBehaviour
 {
     private GameObject stickerPrefab;
     private GameObject stickerCanvas;
-    private GameObject sticker = null;
+    private static GameObject sticker = null;
     private Touch touch_first, touch_second, touch_third;
     private Vector3 startPosition = Vector3.zero;
     private float scaleMagnitude = 0f;
@@ -83,14 +83,14 @@ public class SceneManager : MonoBehaviour
             
             if (Input.GetMouseButtonDown(0))
             {                
-                //PressedDown(); 
+                PressedDown(); 
             }
 
             if (sticker != null)
             {
                 //Scaling();
                 //sticker.transform.Rotate(0f, 180f, 0f);
-                //Pressed();
+                Pressed();
             }
             else
             {
@@ -108,6 +108,17 @@ public class SceneManager : MonoBehaviour
     {
         GameObject bird = Instantiate(stickerPrefab, stickerCanvas.transform);
         bird.GetComponent<Image>().sprite = imageSprite;
+        StickerAssign(bird);        
+    }
+
+    public void StickerAssign(GameObject assignSticker)
+    {
+        if (sticker != null)
+        {
+            sticker.transform.GetChild(0).gameObject.SetActive(false);
+        }
+        sticker = assignSticker;
+        sticker.transform.GetChild(0).gameObject.SetActive(true);
     }
 
     public void TouchDown()
@@ -118,7 +129,7 @@ public class SceneManager : MonoBehaviour
         Physics.Raycast(ray, out hit, 50.0f);
         if (hit.collider != null)
         {
-            sticker = hit.collider.gameObject;
+            StickerAssign(hit.collider.gameObject);
         }
         Debug.Log("Down");
         startPosition = touch_first.position;
@@ -154,7 +165,7 @@ public class SceneManager : MonoBehaviour
         Physics.Raycast(ray, out hit, 50.0f);
         if (hit.collider != null)
         {
-            sticker = hit.collider.gameObject;
+            StickerAssign(hit.collider.gameObject);
         }
         Debug.Log("Down");
 
@@ -231,5 +242,27 @@ public class SceneManager : MonoBehaviour
             scaleMagnitude = scaleValue;
         }
         Debug.Log("LocalScale: " + sticker.transform.localScale);
+    }
+
+    public void CaptureScreenshot(GameObject imageSprite)
+    {
+        string fileName = System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".png";
+        if (sticker != null)
+        {
+            sticker.transform.GetChild(0).gameObject.SetActive(false);
+            imageSprite.SetActive(true);
+            //this.transform.transform.parent.gameObject.SetActive(false);
+            ScreenCapture.CaptureScreenshot(fileName);
+            StartCoroutine(WaitForCapture(imageSprite));
+            Debug.Log(System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss"));
+            //this.transform.transform.parent.gameObject.SetActive(true);            
+        }        
+    }
+
+    public IEnumerator WaitForCapture(GameObject imageSprite)
+    {
+        yield return new WaitForSeconds(3.0f);
+        imageSprite.SetActive(false);
+        sticker.transform.GetChild(0).gameObject.SetActive(true);
     }
 }

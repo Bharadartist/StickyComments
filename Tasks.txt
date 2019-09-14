@@ -1,10 +1,13 @@
-Image Reco
-Canvas
-Photoshop UI
+Image Reco - Done
+Canvas - Done
+Photoshop UI - Done
 Sticker UI
--Buttons
+-Buttons - Done
 -Options
 Instantiate Script
-Touch Functions
+Touch Functions - Move, Scale
 Stickers, flip, Rotate, Capture
 Name
+Print Out
+Record Video
+Convert Gif
