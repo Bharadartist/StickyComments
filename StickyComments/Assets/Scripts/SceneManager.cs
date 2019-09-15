@@ -83,14 +83,14 @@ public class SceneManager : MonoBehaviour
             
             if (Input.GetMouseButtonDown(0))
             {                
-                PressedDown(); 
+                //PressedDown(); 
             }
 
             if (sticker != null)
             {
                 //Scaling();
                 //sticker.transform.Rotate(0f, 180f, 0f);
-                Pressed();
+                //Pressed();
             }
             else
             {
@@ -251,7 +251,7 @@ public class SceneManager : MonoBehaviour
         {
             sticker.transform.GetChild(0).gameObject.SetActive(false);
             imageSprite.SetActive(true);
-            //this.transform.transform.parent.gameObject.SetActive(false);
+            UICapture(imageSprite.transform.parent.gameObject, false);
             ScreenCapture.CaptureScreenshot(fileName);
             StartCoroutine(WaitForCapture(imageSprite));
             Debug.Log(System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss"));
@@ -262,7 +262,21 @@ public class SceneManager : MonoBehaviour
     public IEnumerator WaitForCapture(GameObject imageSprite)
     {
         yield return new WaitForSeconds(3.0f);
+        UICapture(imageSprite.transform.parent.gameObject, true);
         imageSprite.SetActive(false);
         sticker.transform.GetChild(0).gameObject.SetActive(true);
+        imageSprite.transform.transform.parent.GetComponent<Image>().enabled = true;
+    }
+
+    public void UICapture(GameObject stickerPanel, bool activate)
+    {
+        stickerPanel.GetComponent<Image>().enabled = activate;
+        for(int count = 0; count<stickerPanel.transform.childCount; count++)
+        {
+            if(stickerPanel.transform.GetChild(count).tag != "UICapture")
+            {
+                stickerPanel.transform.GetChild(count).GetComponent<Image>().enabled = activate;
+            }
+        }
     }
 }

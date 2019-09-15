@@ -6,6 +6,7 @@ TagManager:
   tags:
   - StickerCanvas
   - StickerPrefab
+  - UICapture
   layers:
   - Default
   - TransparentFX
